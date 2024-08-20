@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}"
+        type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/clean-blog.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <title>{% block title %}Thorin Flask App{% endblock %}</title>
@@ -41,7 +42,8 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('https://pre00.deviantart.net/9ae0/th/pre/f/2013/275/8/f/the_hobbit__thorin_and_company_by_art_calavera-d5nay7b.png')">
+    <header class="masthead"
+        style="background-image: url('https://pre00.deviantart.net/9ae0/th/pre/f/2013/275/8/f/the_hobbit__thorin_and_company_by_art_calavera-d5nay7b.png')">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -57,6 +59,18 @@
 
     <!-- Main Content -->
     <div class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
         {% block content %}
         {% endblock %}
     </div>
